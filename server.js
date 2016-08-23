@@ -90,7 +90,7 @@ function authorsList(req, res) {
         cursor.toArray(function(err, result) {
             if (err) throw err;
             console.log(JSON.stringify(result, null, 2));
-            res.json(JSON.stringify(result, null, 2));
+            res.json(result);
         });
     });
 }
