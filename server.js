@@ -90,12 +90,36 @@ function authorsList(req, res) {
         cursor.toArray(function(err, result) {
             if (err) throw err;
             console.log(JSON.stringify(result, null, 2));
-            res.json(result);
+            res.json(JSON.stringify(result, null, 2));
         });
     });
 }
 
 connect();
+
+// Add headers
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63343');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+
+    // Pass to next layer of middleware
+    next();
+});
+
+app.disable('etag');
 
 app.get('/clusters', function (req, res) {
     //createTable();
@@ -103,6 +127,7 @@ app.get('/clusters', function (req, res) {
     //listenToChange();
     authorsList(req, res);
 });
+
 
 
 app.listen(config.app.port, function () {
