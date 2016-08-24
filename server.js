@@ -1,4 +1,7 @@
+"use strict";
+
 var express = require('express'),
+
     r = require('rethinkdb'),
     app = express(),
     config = require('./config'),
