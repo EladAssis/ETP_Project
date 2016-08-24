@@ -6,9 +6,11 @@ var express = require('express'),
     app = express();
 
 
-var connection = null;
+let connection = null;
+
 
 function connect () {
+
     r.connect( {
         host: 'ec2-52-91-107-30.compute-1.amazonaws.com',
         port: 28015,
